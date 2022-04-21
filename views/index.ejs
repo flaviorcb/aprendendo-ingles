@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <script src="https://kit.fontawesome.com/5254f09054.js" crossorigin="anonymous"></script>
+
+    <title>Aprendendo Inglês</title>
+</head>
+
+<body>
+
+    <div class="logotipoDiv">
+        <p>Aprendendo Inglês</p>
+    </div>
+    <div class="inserirDiv">
+        <form action="/verbete" method="post">
+
+            <label for="original">Original</label>
+            <input type="text" name="original">
+            <label for="verbete">Tradução</label>
+            <input type="text" name="traducao">
+            <button>Adicionar</button>
+        </form>
+    </div>
+    <div class="listagemDiv">
+        <h1>Listagem de verbetes</h1>
+        <table>
+            <tr>
+                <td>Original</td>
+                <td>Tradução</td>
+            </tr>
+            <%lista.forEach((e)=>{%>
+                <tr>
+                    <td>
+                        <%=e.original%>
+                    </td>
+                    <td>
+                        <%=e.traducao%>
+                    </td>
+                    <td>
+                        <i class="fa-solid fa-pen btn-edit" data-id="<%= e._id%>" data-original="<%= e.original%>"
+                            data-traducao="<%= e.traducao%>"></i>
+                    </td>
+                    <td>
+                        <a href="/deleteVerbete?verbete=<%=e._id%>">
+                            <i class="fa-solid fa-trash-can"> </i>
+                        </a>
+                    </td>
+                </tr>
+                <%})%>
+        </table>
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="/updateVerbete" method="post" class="form-modal">
+                <label for="txtOriginalForm">Original</label>
+                <input type="text" name="updateOriginal" id="txtOriginalForm">
+                <label for="txtTraducaoForm">Traducao</label>
+                <input type="text" name="updateTraducao" id="txtTraducaoForm">
+                <input type="hidden" name="id" id="hiddenIdForm">
+                <button>Update</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/modal.js"></script>
+
+</body>
+
+</html>
